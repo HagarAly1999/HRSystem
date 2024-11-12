@@ -1,0 +1,184 @@
+﻿@* @model IEnumerable<Employee>
+<link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
+<link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+<div class="container">
+    <h3 class="text-primary">Employee</h3>
+    <hr />
+
+</div>
+
+<a asp-action="Create" class="btn btn-primary my-3">Add New Employee</a>
+
+<table id='empo' class="table table-striped table-bordered dt-responsive newrap">
+
+    <thead>
+        <tr class="info">
+
+            <th>@Html.DisplayNameFor(model => model.EmployeeNumber)</th>
+       
+            <th>@Html.DisplayNameFor(model => model.EmployeeName)</th>
+       
+            <th>@Html.DisplayNameFor(model => model.HiringDate)</th>
+        
+            <th>@Html.DisplayNameFor(model => model.GrossSalary)</th>
+        
+            <th>@Html.DisplayNameFor(model => model.NetSalary)</th>
+        
+            <th>@Html.DisplayNameFor(model => model.DapartmentName)</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelitem=>item.EmployeeNumber)</td>
+                <td>@Html.DisplayFor(modelitem=>item.EmployeeName)</td>
+                <td>@Html.DisplayFor(modelitem => item.HiringDate)</td>
+                <td>@Html.DisplayFor(modelitem => item.GrossSalary)</td>
+                <td>@Html.DisplayFor(modelitem => item.NetSalary)</td>
+                <td>@Html.DisplayFor(modelitem => item.DapartmentName)</td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId }, new { @class = "btn btn-success" })
+                </td>
+                <td>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId }, new {@class = "btn btn-danger", onclick = "return confirm('Are You Sure To Remove This Employee?')" })
+                </td>
+            </tr>
+         
+        }
+
+    </tbody>
+</table>
+@section scripts {
+        <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+        <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+        <script src="~/lib/datatables/js/employeedatatable.js"></script>
+      
+     
+} *@
+
+@model IEnumerable<Employee>
+<link href="~/lib/datatables/css/datatables.bootstrap4.css" rel="stylesheet" />
+<link href="~/lib/datatables/css/datatables.bootstrap4.min.css" rel="stylesheet" />
+<style>
+    <!-- Custom Styles for Pagination -->
+ 
+        /* Styling for the pagination buttons */
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            padding: 5px 15px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            color: #4169E1; /* Text color for the buttons */
+            background-color: #f8f9fa;
+            font-size: 14px;
+           cursor: default;
+           transition: all 0.3s ease;
+        }
+
+        /* Hover effect on pagination buttons */
+        .dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+        /* Disabled state for pagination buttons (e.g., when on the first or last page) */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.disabled {
+            cursor: not-allowed;
+            background-color: #e9ecef;
+            color: #6c757d;
+            border-color: #ddd;
+        }
+
+        /* Active page button (current page) */
+        .dataTables_wrapper .dataTables_paginate .paginate_button.current {
+          background-color: #007bff;
+           color: #fff;
+          
+            border-color: #007bff;
+        }
+
+        /* Optional: Change "Previous" and "Next" buttons' styles specifically */
+        .dataTables_wrapper .dataTables_paginate .previous,
+        .dataTables_wrapper .dataTables_paginate .next {
+            padding: 5px 10px;
+        }
+
+        /* Custom style for the "Previous" and "Next" buttons only */
+        .dataTables_wrapper .dataTables_paginate .previous {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .next {
+            background-color: #f1f1f1;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+</style>
+
+<div class="container">
+    <h3 class="text-primary">Employee</h3>
+    <hr />
+</div>
+
+<a asp-action="Create" class="btn btn-primary my-3">Add New Employee</a>
+
+<table id="employeeTable" class="table table-striped table-bordered dt-responsive nowrap">
+    <thead>
+        <tr class="info">
+            <th>@Html.DisplayNameFor(model => model.EmployeeNumber)</th>
+            <th>@Html.DisplayNameFor(model => model.EmployeeName)</th>
+            <th>@Html.DisplayNameFor(model => model.HiringDate)</th>
+            <th>@Html.DisplayNameFor(model => model.GrossSalary)</th>
+            <th>@Html.DisplayNameFor(model => model.NetSalary)</th>
+            <th>@Html.DisplayNameFor(model => model.DapartmentName)</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+                <tr>
+                    <td>@Html.DisplayFor(modelitem => item.EmployeeNumber)</td>
+                    <td>@Html.DisplayFor(modelitem => item.EmployeeName)</td>
+                    <td>@Html.DisplayFor(modelitem => item.HiringDate)</td>
+                    <td>@Html.DisplayFor(modelitem => item.GrossSalary)</td>
+                    <td>@Html.DisplayFor(modelitem => item.NetSalary)</td>
+                    <td>@Html.DisplayFor(modelitem => item.DapartmentName)</td>
+                    <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeId }, new { @class = "btn btn-success" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeId }, new { @class = "btn btn-danger", onclick = "return confirm('Are You Sure To Remove This Employee?')" })
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
+
+@section scripts {
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Ensure jQuery is loaded -->
+        <script src="~/lib/datatables/js/jquery.datatables.js"></script>
+        <script src="~/lib/datatables/js/jquery.datatables.min.js"></script>
+
+        <script>
+            $(document).ready(function () {
+                // Initialize DataTables
+                $('#employeeTable').DataTable({
+                    "paging": true,               // Enable pagination
+                    "searching": true,            // Enable search/filter functionality
+                    "lengthChange": true,         // Allow users to change the number of rows shown
+                    "info": true,                 // Show information about the table
+                    "autoWidth": true,            // Automatically adjust column widths
+                     "responsive": true,
+                      "paginate": {
+                      "previous": "Prev",  // Change "Previous" button text if needed
+                       "next": "Next"       // Change "Next" button text if needed
+                }         // Make the table responsive
+                });
+            });
+        </script>
+}

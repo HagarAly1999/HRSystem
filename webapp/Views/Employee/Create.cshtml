@@ -1,0 +1,46 @@
+﻿@model Employee
+
+@{
+    ViewData["Title"] = "Create";
+    // If Model is null (as in Create view), fall back to a default value for DepartmentId
+    int selectedDeptId = Model?.DepartmentId ?? 0;  // Use 0 if Model is null
+    SelectList DeptItems = new SelectList(ViewBag.DeptList, "DepartmentId", "Name", selectedDeptId);
+}
+
+<form asp-action="@ViewData["Title"]">
+    <div asp-validation-summary="All"> </div>
+    <div class="row mb-3">
+        <div class="col-6">
+            <label asp-for="EmployeeNumber" class="control-label"></label>
+            <input asp-for="EmployeeNumber" class="form-control" />
+        </div>
+        <div class="col-6">
+            <label asp-for="EmployeeName" class="control-label"></label>
+            <input asp-for="EmployeeName" class="form-control" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-4">
+            <label asp-for="HiringDate" class="control-label"></label>
+            <input asp-for="HiringDate" class="form-control" />
+        </div>
+        <div class="col-4">
+            <label asp-for="GrossSalary" class="control-label"></label>
+            <input asp-for="GrossSalary" class="form-control" />
+        </div>
+        <div class="col-4">
+            <label asp-for="NetSalary" class="control-label"></label>
+            <input asp-for="NetSalary" class="form-control" />
+        </div>
+    </div>
+    <div class="mb-3">
+        <label asp-for="DepartmentId" class="control-label"></label>
+        <select asp-for="DepartmentId" asp-items="DeptItems" class="form-control">
+            <option value="0">Select Department</option>
+        </select>
+    </div>
+    <input class="btn btn-primary mr-3" type="submit" value="Save" />
+    <a class="btn btn-danger ml-3" asp-action="Index">Cancel</a>
+    <br />
+    <a asp-action="Index" class="btn btn-secondary my-3">Back To Employee Information</a>
+</form>
